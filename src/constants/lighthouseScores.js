@@ -6,4 +6,4 @@ export const LIGHTHOUSE_SCORES = [
 ];
 
 export const LIGHTHOUSE_DATE = '2026-02-08';
-export const LIGHTHOUSE_REPORT_URL = 'https://pagespeed.web.dev/analysis/';
+export const LIGHTHOUSE_REPORT_URL = 'https://pagespeed.web.dev/analysis/https-mahmoud-hamdi-portfolio-netlify-app/3ax74axq2h?form_factor=desktop';

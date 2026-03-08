@@ -1,7 +1,7 @@
 import React from "react";
-import {motion} from 'framer-motion';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from '../../hooks/useTranslation';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import projectsDict from '../../content/projects/projects.content';
 import netFilm from "../../assets/images/netfilm.png";
 import itihub from "../../assets/images/itihub.png";
@@ -50,8 +50,8 @@ const Projects_Data = [
       "Node.js",
       "Hugging Face API",
     ],
-    liveUrl: "https://my-portfolio.netlify.app/",
-    githubUrl: "https://github.com/MahmoudHamdi74/Portfolio",
+    liveUrl: "https://mahmoud-hamdi-portfolio.netlify.app/",
+    githubUrl: "https://github.com/MahmoudHamdi74/React-Portfolio",
   },
   {
     id: 4,
@@ -76,14 +76,12 @@ const Projects_Data = [
 ];
 
 const ProjectCard = ({ project, content }) => {
+  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      whileHover={{ cursor: "pointer" }}
-      className="bg-gray-50 ring-1 ring-amber-200/80 dark:ring-purple-800/60 hover:ring-amber-300 dark:hover:ring-purple-700/60 hover:shadow-lg hover:shadow-amber-200/40 dark:hover:shadow-purple-900/40 hover:scale-102 dark:bg-gray-900/50 rounded-lg shadow-sm shadow-amber-100/50 dark:shadow-purple-900/30 p-6 flex flex-col items-center text-center transition-all duration-300"
+    <div
+      ref={ref}
+      className={`bg-gray-50 ring-1 ring-amber-200/80 dark:ring-purple-800/60 hover:ring-amber-300 dark:hover:ring-purple-700/60 hover:shadow-lg hover:shadow-amber-200/40 dark:hover:shadow-purple-900/40 hover:scale-102 dark:bg-gray-900/50 rounded-lg shadow-sm shadow-amber-100/50 dark:shadow-purple-900/30 p-6 flex flex-col items-center text-center transition-all duration-300 cursor-pointer will-animate ${isVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
     >
       <div className="relevent h-48 overflow-hidden bg-gray-300 dark:bg-gray-700 rounded-xl">
         <img
@@ -137,21 +135,21 @@ const ProjectCard = ({ project, content }) => {
         </div>
       </div>
       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-purple-700 blur-xl -z-10" />
-    </motion.div>
+    </div>
   );
 };
 
 const Projects = () => {
   const content = useTranslation(projectsDict);
+  const { ref: titleRef, isVisible: titleVisible } = useIntersectionObserver({ threshold: 0.3 });
+  const { ref: btnRef, isVisible: btnVisible } = useIntersectionObserver({ threshold: 0.3 });
+
   return (
     <section id="projects" aria-label="Featured Projects" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-        initial={{opacity: 0, y: 30}}
-        whileInView={{opacity: 1, y: 0}}
-        viewport={{once: true}}
-        transition={{duration: 0.6, ease: "easeOut"}}
-          className="text-center mb-16"
+        <div
+          ref={titleRef}
+          className={`text-center mb-16 will-animate ${titleVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700 mb-4">
            <span aria-hidden="true">🚀</span> {content.title}
@@ -159,19 +157,16 @@ const Projects = () => {
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {content.description}
           </p>
-        </motion.div>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Projects_Data.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} content={content} />
           ))}
         </div>
-        <motion.div
-        initial={{opacity: 0}}
-        whileInView={{opacity: 1}}
-        viewport={{once: true}}
-        transition={{delay: Projects_Data.length * 0.1 + 0.5, duration: 0.6, ease: "easeOut"}}
-        className="text-center mt-12"
-      >
+        <div
+          ref={btnRef}
+          className={`text-center mt-12 will-animate ${btnVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
+        >
         <a
           href="https://github.com/MahmoudHamdi74?tab=repositories"
           target="_blank"
@@ -180,7 +175,7 @@ const Projects = () => {
         >
           <FaGithub className="text-xl" /> <span>{content.viewMore}</span>
         </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

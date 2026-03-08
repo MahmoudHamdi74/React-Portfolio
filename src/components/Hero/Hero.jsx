@@ -29,42 +29,28 @@ const Hero = () => {
   return (
     <section id="hero" aria-label="Introduction">
     <div className='relative flex flex-col lg:flex-row items-center justify-center min-h-screen lg:h-screen lg:max-h-[calc(110vh-4.5rem)] overflow-hidden px-4 md:px-8 pt-8 pb-16 lg:pt-0'>
-      {/* Decorative shapes - Mobile (fewer shapes) */}
+      {/* Decorative shapes - Mobile (reduced by 50%) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden mt-20 block md:hidden">
         <div className="absolute top-[5%] left-[5%] w-20 h-20 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-full opacity-40 blur-sm dark:opacity-20 animate-float-slow" />
         <div className="absolute top-[30%] left-[60%] w-20 h-20 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-full opacity-40 blur-sm dark:opacity-20 animate-float-slow " />
         <div className="absolute top-[8%] right-[20%] w-16 h-16 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-xl opacity-40 blur-sm dark:opacity-20 animate-float-slow" style={{ transform: 'rotate(15deg)' }} />
-        <div className="absolute top-[50%] left-[3%] w-14 h-14 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-lg opacity-35 blur-sm dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(45deg)' }} />
-        <div className="absolute top-[30%] left-[30%] w-14 h-14 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-lg opacity-35 blur-sm dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(45deg)' }} />
-        <div className="absolute top-[45%] right-[5%] w-18 h-18 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-full opacity-40 blur-sm dark:opacity-20 animate-float-slow" />
         <div className="absolute bottom-[15%] left-[10%] w-16 h-16 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-xl opacity-35 blur-sm dark:opacity-20 animate-float-slow" style={{ transform: 'rotate(-20deg)' }} />
-        <div className="absolute bottom-[20%] right-[8%] w-14 h-14 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-600 dark:via-purple-500 dark:to-purple-800 rounded-lg opacity-40 blur-sm dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(30deg)' }} />
       </div>
-      {/* Decorative shapes - Desktop (full set) */}
+      {/* Decorative shapes - Desktop (reduced by 50% for performance) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden mt-20 hidden md:block">
         {/* Row 1 - Top */}
-        <div className="absolute top-[8%] left-[10%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-full opacity-50 blur-xs dark:opacity-20 animate-float-slow " />
-        <div className="absolute top-[15%] left-[25%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-full opacity-50 blur-xs dark:opacity-20 animate-float-slow " />
-        <div className="absolute top-[10%] left-[55%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-2xl opacity-45 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(15deg)' }} />
-        <div className="absolute top-[5%] left-[40%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-2xl opacity-45 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(15deg)' }} />
-        <div className="absolute top-[12%] right-[8%] w-36 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-2xl opacity-50 blur-xs dark:opacity-20 animate-float-slow " style={{ transform: 'rotate(-20deg)' }} />
-        <div className="absolute top-[28%] right-[23%] w-36 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-xl opacity-50 blur-xs dark:opacity-20 animate-float-slow " style={{ transform: 'rotate(-29deg)' }} />
-        {/* Row 2 - Upper Middle */}
-        <div className="absolute top-[35%] left-[44%] w-24 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-lg opacity-50 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(45deg)' }} />
-        <div className="absolute top-[30%] right-[12%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-full opacity-45 blur-xs dark:opacity-20 " />
-        <div className="absolute top-[45%] right-[2%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-full opacity-45 blur-xs dark:opacity-20 animate-float-slow" />
+        <div className="absolute top-[8%] left-[10%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-full opacity-50 blur-xs dark:opacity-20 animate-float-slow " />
+        <div className="absolute top-[10%] left-[55%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-2xl opacity-45 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(15deg)' }} />
+        <div className="absolute top-[12%] right-[8%] w-36 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-2xl opacity-50 blur-xs dark:opacity-20 animate-float-slow " style={{ transform: 'rotate(-20deg)' }} />
+        
+        {/* Row 2 - Middle */}
+        <div className="absolute top-[35%] left-[44%] w-24 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-lg opacity-50 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(45deg)' }} />
+        <div className="absolute top-[45%] right-[2%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-full opacity-45 blur-xs dark:opacity-20 animate-float-slow" />
+        <div className="absolute top-[40%] left-[20%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-full opacity-50 blur-xs dark:opacity-20 animate-float-slow" />
 
-        {/* Row 3 - Center */}
-        <div className="absolute top-[72%] left-[40%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-lg dark:shadow-purple-500 rounded-full opacity-50 blur-xs dark:opacity-20 animate-float-slow" />
-        <div className="absolute top-[40%] left-[20%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-lg dark:shadow-purple-500 rounded-full opacity-50 blur-xs dark:opacity-20 animate-float-slow" />
-        <div className="absolute top-[75%] right-[30%] w-36 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-lg dark:shadow-purple-500 rounded-2xl opacity-45 blur-xs dark:opacity-20 animate-float-slow" style={{ transform: 'rotate(-15deg)' }} />
-        <div className="absolute top-[55%] right-[25%] w-36 h-24 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-lg dark:shadow-purple-500 rounded-2xl opacity-45 blur-xs dark:opacity-20 animate-float-slow" style={{ transform: 'rotate(-15deg)' }} />
-
-        {/* Row 4 - Lower */}
-        <div className="absolute bottom-[10%] left-[20%] w-40 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-2xl opacity-50 blur-xs dark:opacity-20 animate-float-slow" style={{ transform: 'rotate(18deg)' }} />
-        <div className="absolute bottom-[20%] left-[8%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-lg opacity-50 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(18deg)' }} />
-        <div className="absolute bottom-[22%] left-[50%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-6 dark:ring-white shadow-md dark:shadow-purple-500 rounded-full opacity-45 blur-xs dark:opacity-20 animate-float-slow" />
-        <div className="absolute bottom-[18%] right-[10%] w-28 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 ring-4 dark:ring-white shadow-lg dark:shadow-purple-500 rounded-lg opacity-45 blur-xs dark:opacity-20 animate-[spin_10s_linear_infinite]" style={{ transform: 'rotate(-3０deg)' }} />
+        {/* Row 3 - Bottom */}
+        <div className="absolute bottom-[10%] left-[20%] w-40 h-28 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-2xl opacity-50 blur-xs dark:opacity-20 animate-float-slow" style={{ transform: 'rotate(18deg)' }} />
+        <div className="absolute bottom-[22%] left-[50%] w-32 h-32 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-blue-500 rounded-full opacity-45 blur-xs dark:opacity-20 animate-float-slow" />
       </div>
       {/* TechCloud for mobile - above text */}
       <motion.div 
