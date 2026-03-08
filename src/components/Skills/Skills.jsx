@@ -70,7 +70,16 @@ const SKILLS_DATA = {
 
 // Skill Bar Component
 const SkillBar = ({ skill, index, isVisible, content }) => {
-  const [animatedLevel, setAnimatedLevel] = useState(skill.level);
+  const [animatedLevel, setAnimatedLevel] = useState(0);
+
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        setAnimatedLevel(skill.level);
+      }, index * 100);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, skill.level, index]);
 
   return (
     <div className="group">
@@ -91,7 +100,7 @@ const SkillBar = ({ skill, index, isVisible, content }) => {
 
       {/* Progress Bar */}
       <div className="relative h-3 bg-transparent">
-        {/* Static progress bar */}
+        {/* Animated progress bar */}
         <div
           className="absolute top-0 left-0 h-full rounded-full bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-cyan-400"
           style={{ width: `${animatedLevel}%` }}
@@ -103,8 +112,8 @@ const SkillBar = ({ skill, index, isVisible, content }) => {
         />
       </div>
 
-      {/* Skill Details */}
-      <div className="mt-2 text-xs text-gray-400">
+      {/* Skill Details on Hover - اختياري */}
+      <div className="mt-2 text-xs text-gray-400 overflow-hidden h-0 opacity-0 group-hover:opacity-100 group-hover:h-auto transition-all">
         <div className="flex gap-4">
           <span>📅 {skill.years} {content.years}</span>
           <span>🚀 {skill.projects} {content.projects}</span>

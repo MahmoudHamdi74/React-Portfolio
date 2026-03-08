@@ -151,7 +151,9 @@ const Projects = () => {
             <ProjectCard key={project.id} project={project} index={index} content={content} />
           ))}
         </div>
-        <div className="text-center mt-12">
+        <div
+          className="text-center mt-12"
+        >
         <a
           href="https://github.com/MahmoudHamdi74?tab=repositories"
           target="_blank"
