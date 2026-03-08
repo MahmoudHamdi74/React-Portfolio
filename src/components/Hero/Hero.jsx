@@ -58,7 +58,7 @@ const Hero = () => {
         className='container relative mx-auto lg:ml-44 text-center lg:text-left h-full flex flex-col justify-center items-center lg:items-start '
       >
         <h1 className='relative z-10 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700'>{content.name}</h1>
-        <h2 className='relative z-10 my-4 md:my-8 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-600 dark:text-purple-500 dark:drop-shadow-lg dark:drop-shadow-purple-700'>{content.title}</h2>
+        <h2 className='relative z-10 my-4 md:my-8 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-600 dark:text-purple-500 dark:drop-shadow-lg dark:drop-shadow-purple-700 animate-bounce duration-1000'>{content.title}</h2>
         <p className='relative z-10 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 my-4 md:my-8 font-medium text-gray-700 dark:text-purple-300 dark:drop-shadow-lg dark:drop-shadow-purple-700'>{content.description}</p>
         <div className='flex justify-center mt-8 lg:justify-start gap-4'>
         <a href={Cv} download="Mahmoud_Hamdi_CV.pdf" aria-label={content.downloadCV} className='relative z-10 w-36 md:w-40 h-11 md:h-12 flex justify-center items-center gap-1 text-base md:text-lg font-medium text-amber-800 ring-2 ring-amber-800 bg-amber-500 hover:bg- shadow-md shadow-amber-200/50 hover:shadow-lg hover:shadow-amber-300/60 dark:bg-purple-600 dark:ring-purple-500 dark:text-purple-100 dark:shadow-purple-900/30 dark:hover:bg-purple-700 dark:hover:shadow-purple-800/50 rounded-md transition-all duration=300'><Download aria-hidden="true" />{content.downloadCV}</a>
