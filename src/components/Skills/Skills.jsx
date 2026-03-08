@@ -69,7 +69,7 @@ const SKILLS_DATA = {
 };
 
 // Skill Bar Component
-const SkillBar = ({ skill, index, isVisible, content }) => {
+const SkillBar = ({ skill, index, isVisible }) => {
   const [animatedLevel, setAnimatedLevel] = useState(0);
 
   useEffect(() => {
@@ -113,18 +113,13 @@ const SkillBar = ({ skill, index, isVisible, content }) => {
       </div>
 
       {/* Skill Details on Hover - اختياري */}
-      <div className="mt-2 text-xs text-gray-400 overflow-hidden h-0 opacity-0 group-hover:opacity-100 group-hover:h-auto transition-all">
-        <div className="flex gap-4">
-          <span>📅 {skill.years} {content.years}</span>
-          <span>🚀 {skill.projects} {content.projects}</span>
-        </div>
-      </div>
+      
     </div>
   );
 };
 
 // Category Card Component
-const CategoryCard = ({ categoryName, data, index, isOpen, toggleOpen, content }) => {
+const CategoryCard = ({ categoryName, data, isOpen, toggleOpen, content }) => {
   return (
     <details
       open={isOpen}
