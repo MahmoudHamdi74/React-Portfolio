@@ -119,7 +119,7 @@ const About = () => {
               </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
       <TechMarquee />
     </section>
