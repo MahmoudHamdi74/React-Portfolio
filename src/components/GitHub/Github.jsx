@@ -1,4 +1,3 @@
-import { AnimatePresence,  motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "../../hooks/useTranslation";
 import githubDict from "../../content/github/github.content";
@@ -66,12 +65,8 @@ const ActivityCard = ({ activity, index }) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.5, ease: "easeOut" }}
-      whileHover={{ scale: 1.02, cursor: "pointer", x: 4 }}
-      className={`flex items-center gap-3 rounded-lg group transition-all duration-300 bg-amber-50/50 dark:bg-gray-800/40 border border-amber-100 dark:border-purple-900/30 p-4 shadow-sm hover:shadow-md hover:shadow-amber-200/50 dark:hover:shadow-purple-800/30`}
+    <div
+      className={`flex items-center gap-3 rounded-lg group transition-all duration-300 bg-amber-50/50 dark:bg-gray-800/40 border border-amber-100 dark:border-purple-900/30 p-4 shadow-sm hover:shadow-md hover:shadow-amber-200/50 dark:hover:shadow-purple-800/30 hover:scale-[1.02] hover:translate-x-1 cursor-pointer`}
       onClick={() =>
         window.open(`https://github.com/${activity.repo.name}`, "_blank")
       }
@@ -101,7 +96,7 @@ const ActivityCard = ({ activity, index }) => {
       <div className="text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-gray-500 dark:text-neutral-400">
         →
       </div>
-    </motion.div>
+    </div>
   );
 };
 const ActivityStats = ({ activities, content }) => {
@@ -124,11 +119,8 @@ const ActivityStats = ({ activities, content }) => {
   return (
     <div className="grid grid-cols-3 gap-3 mb-6">
       {stateItems.map((stat, index) => (
-        <motion.div
+        <div
           key={stat.label}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: index * 0.1, duration: 0.5 }}
           className="text-center p-3 rounded-lg bg-amber-50 dark:bg-gray-800/50 border border-amber-200 dark:border-purple-800/40 shadow-sm shadow-amber-100 dark:shadow-purple-900/20"
         >
           <div className="text-2xl mb-1">{stat.icon}</div>
@@ -138,7 +130,7 @@ const ActivityStats = ({ activities, content }) => {
           <div className="text-xs text-gray-500 dark:text-neutral-400">
             {stat.label}
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -168,14 +160,12 @@ const ErrorState = ({ onRetry, content }) => (
     <p className="text-sm mb-4 text-gray-600 dark:text-gray-400">
       {content.errorDesc}
     </p>
-    <motion.button
+    <button
       onClick={onRetry}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-linear-to-t from-amber-200 to-amber-500 hover-3d dark:from-purple-700 dark:to-purple-500 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 dark:focus:ring-purple-500 focus:ring-offset-2"
+      className="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 bg-linear-to-t from-amber-200 to-amber-500 hover-3d dark:from-purple-700 dark:to-purple-500 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 dark:focus:ring-purple-500 focus:ring-offset-2"
     >
       {content.tryAgain}
-    </motion.button>
+    </button>
   </div>
 );
 
@@ -245,13 +235,7 @@ export default function Github() {
   return (
     <section id="github" >
     <div className="max-w-4xl mx-auto py-16 px-4 lg:px-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-12 text-center"
-        >
+      <div className="mb-12 text-center">
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700 mb-4">
           <span aria-hidden="true">🐙</span> {content.title}
         </h2>
@@ -263,7 +247,7 @@ export default function Github() {
                 {content.lastUpdated} {lastUpdated.toLocaleTimeString()}
             </p>
         )}
-  </motion.div>
+  </div>
 
 
   <div className="bg-amber-50/50 dark:bg-gray-900/60 border border-amber-200 dark:border-purple-800/50 rounded-xl p-6 shadow-md shadow-amber-100 dark:shadow-purple-900/30">
@@ -273,32 +257,23 @@ export default function Github() {
           <>
             <ActivityStats activities={activities} content={content} />
             <div className="space-y-4">
-              <AnimatePresence>
               {activities.map((activity, index) => (
                 <ActivityCard key={activity.id} activity={activity} index={index} />
               ))}
-              </AnimatePresence>
             </div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{delay: 0.8}}
-              className="text-center mt-6"
-              >
-                <motion.a
+            <div className="text-center mt-6">
+                <a
                   href={`https://github.com/${GITHUB_CONFIG.username}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-linear-to-t from-amber-200 to-amber-500 hover-3d dark:from-purple-700 dark:to-purple-500 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 dark:focus:ring-purple-500 focus:ring-offset-2"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 active:scale-95 bg-linear-to-t from-amber-200 to-amber-500 hover-3d dark:from-purple-700 dark:to-purple-500 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 dark:focus:ring-purple-500 focus:ring-offset-2"
                   >
                  <span>{content.viewProfile}</span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                     <path d="M14 3h7a1 1 0 0 1 1 1v7a1 1 0 0 1-2 0V6.41l-9.29 9.3a1 1 0 0 1-1.42-1.42L18.59 5H14a1 1 0 0 1-1-1z"/>
                   </svg>
-                </motion.a>
-              </motion.div>
+                </a>
+              </div>
           </>
         )}
   </div>

@@ -4,32 +4,22 @@ import { GoPersonFill } from "react-icons/go";
 import { MdOutlineEmail, MdWhatsapp } from "react-icons/md";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import { useTranslation } from "../../hooks/useTranslation";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import aboutDict from "../../content/about/about.content";
 import Me from "../../assets/images/me2.png";
 import TechMarquee from "./Marquee";
 
 const About = () => {
   const content = useTranslation(aboutDict);
-  const { ref: titleRef, isVisible: titleVisible } = useIntersectionObserver({ threshold: 0.3 });
-  const { ref: imageRef, isVisible: imageVisible } = useIntersectionObserver({ threshold: 0.3 });
-  const { ref: contentRef, isVisible: contentVisible } = useIntersectionObserver({ threshold: 0.3 });
 
   return (
     <section id="about" aria-label="About Me" className="text-gray-900 dark:text-white transition-colors px-4 md:px-8">
-      <div 
-        ref={titleRef}
-        className={`pt-10 will-animate ${titleVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
-      >
+      <div className="pt-10">
         <h2 className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
           {content.title}
         </h2>
       </div>
       <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen mx-auto max-w-7xl items-center gap-8 lg:gap-12 py-10 lg:py-0">
-        <div 
-          ref={imageRef}
-          className={`w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-100 lg:h-100 relative shrink-0 flex items-center justify-center will-animate ${imageVisible ? 'animate-fadeInLeft' : 'animate-on-scroll'}`}
-        >
+        <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-100 lg:h-100 relative shrink-0 flex items-center justify-center">
           <div className="absolute h-full w-full inset-0 rounded-full bg-linear-to-r from-amber-400 via-amber-500 to-amber-600 dark:from-cyan-500 dark:via-blue-500 dark:to-purple-500 animate-pulse blur-md"></div>
 
           <div className="absolute inset-1 bg-gray-900 rounded-full flex items-center justify-center overflow-hidden">
@@ -47,10 +37,7 @@ const About = () => {
             <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-amber-400 dark:bg-blue-500 rounded-full animate-ping delay-300 hidden md:block"></div>
           </div>
         </div>
-        <div 
-          ref={contentRef}
-          className={`w-full lg:w-3/4 text-base md:text-lg lg:text-xl font-medium shadow-lg shadow-amber-100 dark:shadow-purple-300/30 rounded-2xl p-6 md:p-10 bg-amber-50/50 dark:bg-gray-800/70 backdrop-blur-xl border border-amber-200 dark:border-purple-800/50 will-animate ${contentVisible ? 'animate-fadeInRight' : 'animate-on-scroll'}`}
-        >
+        <div className="w-full lg:w-3/4 text-base md:text-lg lg:text-xl font-medium shadow-lg shadow-amber-100 dark:shadow-purple-300/30 rounded-2xl p-6 md:p-10 bg-amber-50/50 dark:bg-gray-800/70 backdrop-blur-xl border border-amber-200 dark:border-purple-800/50">
           <h3 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
             <span className="text-amber-600 dark:text-purple-500 dark:drop-shadow-purple-600 dark:text-shadow-cyan-400 dark:text-shadow-2xs">
               Mahmoud Hamdi

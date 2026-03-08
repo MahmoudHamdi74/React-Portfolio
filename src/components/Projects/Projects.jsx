@@ -1,7 +1,6 @@
 import React from "react";
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from '../../hooks/useTranslation';
-import { useIntersectionObserver } from '../../hooks/useIntersectionObserver';
 import projectsDict from '../../content/projects/projects.content';
 import netFilm from "../../assets/images/netfilm.png";
 import itihub from "../../assets/images/itihub.png";
@@ -45,10 +44,7 @@ const Projects_Data = [
       "A personal portfolio website showcasing my projects, skills, and experience. Built with modern web technologies to provide an engaging and responsive user experience.",
     technologies: [
       "React",
-      "Tailwind CSS",
-      "Express",
-      "Node.js",
-      "Hugging Face API",
+      "Tailwind CSS"
     ],
     liveUrl: "https://mahmoud-hamdi-portfolio.netlify.app/",
     githubUrl: "https://github.com/MahmoudHamdi74/React-Portfolio",
@@ -76,12 +72,9 @@ const Projects_Data = [
 ];
 
 const ProjectCard = ({ project, content }) => {
-  const { ref, isVisible } = useIntersectionObserver({ threshold: 0.1 });
-
   return (
     <div
-      ref={ref}
-      className={`bg-gray-50 ring-1 ring-amber-200/80 dark:ring-purple-800/60 hover:ring-amber-300 dark:hover:ring-purple-700/60 hover:shadow-lg hover:shadow-amber-200/40 dark:hover:shadow-purple-900/40 hover:scale-102 dark:bg-gray-900/50 rounded-lg shadow-sm shadow-amber-100/50 dark:shadow-purple-900/30 p-6 flex flex-col items-center text-center transition-all duration-300 cursor-pointer will-animate ${isVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
+      className="bg-gray-50 ring-1 ring-amber-200/80 dark:ring-purple-800/60 hover:ring-amber-300 dark:hover:ring-purple-700/60 hover:shadow-lg hover:shadow-amber-200/40 dark:hover:shadow-purple-900/40 hover:scale-102 dark:bg-gray-900/50 rounded-lg shadow-sm shadow-amber-100/50 dark:shadow-purple-900/30 p-6 flex flex-col items-center text-center transition-all duration-300 cursor-pointer"
     >
       <div className="relevent h-48 overflow-hidden bg-gray-300 dark:bg-gray-700 rounded-xl">
         <img
@@ -141,16 +134,11 @@ const ProjectCard = ({ project, content }) => {
 
 const Projects = () => {
   const content = useTranslation(projectsDict);
-  const { ref: titleRef, isVisible: titleVisible } = useIntersectionObserver({ threshold: 0.3 });
-  const { ref: btnRef, isVisible: btnVisible } = useIntersectionObserver({ threshold: 0.3 });
 
   return (
     <section id="projects" aria-label="Featured Projects" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div
-          ref={titleRef}
-          className={`text-center mb-16 will-animate ${titleVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
-        >
+        <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700 mb-4">
            <span aria-hidden="true">🚀</span> {content.title}
           </h2>
@@ -163,10 +151,7 @@ const Projects = () => {
             <ProjectCard key={project.id} project={project} index={index} content={content} />
           ))}
         </div>
-        <div
-          ref={btnRef}
-          className={`text-center mt-12 will-animate ${btnVisible ? 'animate-fadeInUp' : 'animate-on-scroll'}`}
-        >
+        <div className="text-center mt-12">
         <a
           href="https://github.com/MahmoudHamdi74?tab=repositories"
           target="_blank"

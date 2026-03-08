@@ -1,32 +1,8 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useTranslation } from "../../hooks/useTranslation";
 import contactDict from "../../content/contact/contact.content";
 import ContactForm from "./ContactForm";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 20,
-    },
-  },
-};
 
 const contact = {
   address: "Luxor, Egypt",
@@ -45,24 +21,18 @@ export default function Contact() {
   return (
     <section key={activeTab} className="py-16 md:py-20 px-4 md:px-8 " id="contact">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          <motion.div className="text-center" variants={itemVariants}>
+        <div>
+          <div className="text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
               {content.title}
             </h2>
-          </motion.div>
-          <motion.p
-            variants={itemVariants}
+          </div>
+          <p
             className="text-lg text-center mb-12 text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto"
           >
             {content.description}
-          </motion.p>
-          <motion.div
-            variants={itemVariants}
+          </p>
+          <div
             className="flex justify-center mb-12"
           >
             <div className="flex rounded-lg p-1 bg-amber-50 border border-amber-200 dark:bg-gray-900/60 dark:border-purple-800/50">
@@ -70,36 +40,24 @@ export default function Contact() {
                 { id: "info", label: content.contactInfo, icon: "📍" },
                 { id: "form", label: content.sendMessage, icon: "📧" },
               ].map((tab) => (
-                <motion.button
+                <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className={`relative px-6 py-3 m-1 rounded-lg font-medium text-md transition-all duration-300 ${activeTab === tab.id ? "bg-amber-300 shadow-sm shadow-amber-200 dark:bg-purple-600 dark:shadow-purple-900/30 text-gray-900 dark:text-white" : "text-gray-600 hover:bg-amber-100 dark:text-gray-400 dark:hover:bg-purple-900/30"}`}
+                  className={`relative px-6 py-3 m-1 rounded-lg font-medium text-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${activeTab === tab.id ? "bg-amber-300 shadow-sm shadow-amber-200 dark:bg-purple-600 dark:shadow-purple-900/30 text-gray-900 dark:text-white" : "text-gray-600 hover:bg-amber-100 dark:text-gray-400 dark:hover:bg-purple-900/30"}`}
                 >
                   <span className="mr-2">{tab.icon}</span>
                   {tab.label}
-                </motion.button>
+                </button>
               ))}
             </div>
-          </motion.div>
+          </div>
           <div className="relative">
-            <AnimatePresence mode="wait">
               {activeTab === "info" && (
-                <motion.div
-                  key="contact-info"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div key="contact-info">
                   <div className="max-w-4xl mx-auto">
                       <div className="rounded-2xl p-8 shadow-md border bg-amber-50/80 border-amber-200 shadow-amber-100 dark:bg-gray-900/50 dark:border-purple-800/50 dark:shadow-purple-900/30">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-items-center ">
-                        <motion.div
-                          variants={itemVariants}
-                          className="text-center md:text-left"
-                        >
+                        <div className="text-center md:text-left">
                           <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 bg-amber-100 text-gray-700 dark:bg-purple-900/40 dark:text-purple-300">
                             📍
                           </div>
@@ -109,9 +67,8 @@ export default function Contact() {
                           <p className="text-sm leading-relaxed text-gray-700 dark:text-neutral-300">
                             {content.addressValue}
                           </p>
-                        </motion.div>
-                        <motion.div
-                          variants={itemVariants}
+                        </div>
+                        <div
                           className="text-center md:text-left"
                         >
                           <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 bg-amber-100 text-gray-700 dark:bg-purple-900/40 dark:text-purple-300">
@@ -126,9 +83,8 @@ export default function Contact() {
                           >
                             {contact.phone}
                           </a>
-                        </motion.div>
-                        <motion.div
-                          variants={itemVariants}
+                        </div>
+                        <div
                           className="text-center md:text-left"
                         >
                           <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4 bg-amber-100 text-gray-700 dark:bg-purple-900/40 dark:text-purple-300">
@@ -143,54 +99,41 @@ export default function Contact() {
                           >
                             {contact.email}
                           </a>
-                        </motion.div>
+                        </div>
                       </div>
                       <div className="flex flex-col sm:flex-row gap-8 pt-8">
-                        <motion.a
-                          variants={itemVariants}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
+                        <a
                           href={contact.socials.whatsapp}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="  flex-1 text-center py-3 px-6 rounded-lg font-medium transition-colors bg-linear-to-t from-amber-200 to-amber-500 hover:from-amber-300 hover:to-amber-600 dark:bg-linear-to-r dark:from-purple-600 dark:to-purple-400 dark:hover:from-purple-700 dark:hover:to-purple-500 text-gray-800 dark:text-neutral-50"
+                          className="flex-1 text-center py-3 px-6 rounded-lg font-medium transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] bg-linear-to-t from-amber-200 to-amber-500 hover:from-amber-300 hover:to-amber-600 dark:bg-linear-to-r dark:from-purple-600 dark:to-purple-400 dark:hover:from-purple-700 dark:hover:to-purple-500 text-gray-800 dark:text-neutral-50"
                         >
                           <span className="text-xl flex items-center justify-center gap-2">
                             <FaWhatsapp />{content.whatsappChat}
                           </span>
-                        </motion.a>
-                        <motion.button
-                          variants={itemVariants}
+                        </a>
+                        <button
                           onClick={()=>setActiveTab('form')}
-                          whileHover={{ scale: 1.02 ,cursor:'pointer'}}
-                          whileTap={{ scale: 0.98 }}
-                          className="flex-1 text-center py-3 px-6 rounded-lg font-medium border transition-colors border-amber-300 hover:bg-amber-100 text-gray-700 dark:border-purple-700 dark:hover:bg-purple-900/30 dark:text-purple-300"
+                          className="flex-1 text-center py-3 px-6 rounded-lg font-medium border transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] hover:cursor-pointer border-amber-300 hover:bg-amber-100 text-gray-700 dark:border-purple-700 dark:hover:bg-purple-900/30 dark:text-purple-300"
                         >
                           <span className="text-xl me-2">
                             📧 {content.sendMessage}
                           </span>
-                        </motion.button>
+                        </button>
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               )}
               {activeTab === "form" && (
-                <motion.div
-                  key="contact-form"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div key="contact-form">
                   <div className="max-w-4xl mx-auto">
                     <ContactForm />
                   </div>
-                </motion.div>
+                </div>
               )}
-            </AnimatePresence>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaAngular,
   FaBootstrap,
@@ -71,28 +70,10 @@ const SKILLS_DATA = {
 
 // Skill Bar Component
 const SkillBar = ({ skill, index, isVisible, content }) => {
-  const [animatedLevel, setAnimatedLevel] = useState(0);
-
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setAnimatedLevel(skill.level);
-      }, index * 100);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, skill.level, index]);
+  const [animatedLevel, setAnimatedLevel] = useState(skill.level);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -50 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{
-        delay: index * 0.1,
-        duration: 0.5,
-        ease: "easeOut"
-      }}
-      className="group"
-    >
+    <div className="group">
       {/* Skill Header */}
       <div className="flex items-center justify-between m-2">
         <h4 className="text-xl font-bold gap-4 flex items-center">
@@ -110,16 +91,10 @@ const SkillBar = ({ skill, index, isVisible, content }) => {
 
       {/* Progress Bar */}
       <div className="relative h-3 bg-transparent">
-        {/* Animated progress bar */}
-        <motion.div
+        {/* Static progress bar */}
+        <div
           className="absolute top-0 left-0 h-full rounded-full bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-cyan-400"
-          initial={{ width: "0%" }}
-          animate={{ width: `${animatedLevel}%` }}
-          transition={{
-            duration: 1.5,
-            delay: index * 0.1,
-            ease: "easeOut"
-          }}
+          style={{ width: `${animatedLevel}%` }}
           role="progressbar"
           aria-valuenow={animatedLevel}
           aria-valuemin="0"
@@ -128,37 +103,21 @@ const SkillBar = ({ skill, index, isVisible, content }) => {
         />
       </div>
 
-      {/* Skill Details on Hover - اختياري */}
-      <motion.div
-        initial={{ opacity: 0, height: 0 }}
-        whileHover={{
-          opacity: 1,
-          height: "auto",
-          transition: { duration: 0.2 }
-        }}
-        className="mt-2 text-xs text-gray-400 overflow-hidden"
-      >
+      {/* Skill Details */}
+      <div className="mt-2 text-xs text-gray-400">
         <div className="flex gap-4">
           <span>📅 {skill.years} {content.years}</span>
           <span>🚀 {skill.projects} {content.projects}</span>
         </div>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 
 // Category Card Component
 const CategoryCard = ({ categoryName, data, index, isOpen, toggleOpen, content }) => {
   return (
-    <motion.details
-      layout
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: index * 0.1,
-        duration: 0.6,
-        ease: "easeOut"
-      }}
+    <details
       open={isOpen}
       onToggle={toggleOpen}
       className="collapse collapse-arrow transition-all duration-500 border border-amber-300 ring-2 ring-amber-300/60 dark:border-purple-700/60 dark:ring-purple-700/40 bg-gray-50 dark:bg-gray-900/40 backdrop-blur-xl hover:scale-102"
@@ -193,7 +152,7 @@ const CategoryCard = ({ categoryName, data, index, isOpen, toggleOpen, content }
           ))}
         </div>
       </div>
-    </motion.details>
+    </details>
   );
 };
 
@@ -220,19 +179,14 @@ export default function SkillsVisualization() {
     <section id="skills" aria-label="Skills" className="text-gray-900 dark:text-white transition-colors">
       <div className="pt-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div>
           <h2 className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
             <FcServices className="mr-3" aria-hidden="true" /> {content.title}
           </h2>
           <p className="flex justify-center text-center mt-6 md:mt-10 text-base md:text-lg lg:text-xl max-w-3xl w-full mx-auto px-4 font-medium text-gray-500 dark:text-gray-400">
             {content.description}
           </p>
-        </motion.div>
+        </div>
 
         {/* Skills Grid - First Row */}
         <div className="mx-auto flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-6 mt-10 md:mt-20 max-w-7xl px-4">
@@ -267,32 +221,19 @@ export default function SkillsVisualization() {
         </div>
 
         {/* Performance Metrics */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mx-auto mt-10 md:mt-20 max-w-7xl px-4"
-        >
+        <div className="mx-auto mt-10 md:mt-20 max-w-7xl px-4">
           <h2 className="font-bold mb-4 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
             {content.performanceMetrics}
           </h2>
           <LightHouseScoreCard />
-        </motion.div>
+        </div>
 
         {/* Quick Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4"
-        >
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4">
           {QUICK_STATS.map((stat) => (
-            <motion.div
+            <div
               key={stat.label}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="text-center p-4 rounded-xl transition-all duration-300 bg-amber-50 dark:bg-gray-900/50 border border-amber-200 dark:border-purple-800/50 shadow-sm shadow-amber-100 dark:shadow-purple-900/30"
+              className="text-center p-4 rounded-xl transition-all duration-300 bg-amber-50 dark:bg-gray-900/50 border border-amber-200 dark:border-purple-800/50 shadow-sm shadow-amber-100 dark:shadow-purple-900/30 hover:scale-105 hover:-translate-y-1"
             >
               <div className="text-2xl mb-2">{stat.icon}</div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -301,9 +242,9 @@ export default function SkillsVisualization() {
               <div className="text-sm text-gray-600 dark:text-neutral-400">
                 {stat.label}
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
