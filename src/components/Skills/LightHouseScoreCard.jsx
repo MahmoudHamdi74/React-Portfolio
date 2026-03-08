@@ -54,7 +54,7 @@ const CircularProgress = memo(function CircularProgress({ value, size = 50, stro
   );
 });
 
-const LighthouseScoreCard = memo(function LighthouseScoreCard() {
+const LightHouseScoreCard = memo(function LightHouseScoreCard() {
   const [isHovered, setIsHovered] = useState(false);
   const showScores = useLighthouseScoreAnimation();
 
@@ -121,4 +121,4 @@ const LighthouseScoreCard = memo(function LighthouseScoreCard() {
   );
 });
 
-export default LighthouseScoreCard;
+export default LightHouseScoreCard;

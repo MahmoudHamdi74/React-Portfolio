@@ -23,7 +23,7 @@ import {
 } from "react-icons/si";
 import { useTranslation } from '../../hooks/useTranslation';
 import skillsDict from '../../content/skills/skills.content';
-import LighthouseScoreCard from './LighthouseScoreCard';
+import LightHouseScoreCard from './LightHouseScoreCard';
 
 // Skills Data مباشرة في الملف
 const SKILLS_DATA = {
@@ -277,7 +277,7 @@ export default function SkillsVisualization() {
           <h2 className="font-bold mb-4 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
             {content.performanceMetrics}
           </h2>
-          <LighthouseScoreCard />
+          <LightHouseScoreCard />
         </motion.div>
 
         {/* Quick Stats */}
