@@ -10,7 +10,7 @@ const Navbar = () => {
   const content = useTranslation(navbarDict);
   const [darkMode, setDarkMode] = useState(() => {
     const stored = localStorage.getItem("theme");
-    return stored ? stored === "dark" : false;
+    return stored ? stored === "dark" : true; // Dark mode as default
   });
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("hero");
