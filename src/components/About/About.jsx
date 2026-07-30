@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import { FcAbout, FcHome, FcPhone } from "react-icons/fc";
 import { GoPersonFill } from "react-icons/go";
 import { MdOutlineEmail, MdWhatsapp } from "react-icons/md";
@@ -15,24 +14,12 @@ const About = () => {
   return (
     <section id="about" aria-label="About Me" className="text-gray-900 dark:text-white transition-colors px-4 md:px-8">
       <div className="pt-10">
-        <motion.h2
-          className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <h2 className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
           {content.title}
-        </motion.h2>
+        </h2>
       </div>
       <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen mx-auto max-w-7xl items-center gap-8 lg:gap-12 py-10 lg:py-0">
-        <motion.div
-          className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-100 lg:h-100 relative shrink-0 flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <div className="w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-100 lg:h-100 relative shrink-0 flex items-center justify-center">
           <div className="absolute h-full w-full inset-0 rounded-full bg-linear-to-r from-amber-400 via-amber-500 to-amber-600 dark:from-cyan-500 dark:via-blue-500 dark:to-purple-500 animate-pulse blur-md"></div>
 
           <div className="absolute inset-1 bg-gray-900 rounded-full flex items-center justify-center overflow-hidden">
@@ -49,15 +36,9 @@ const About = () => {
             <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-amber-500 dark:bg-cyan-500 rounded-full animate-ping delay-200 hidden md:block"></div>
             <div className="absolute -bottom-1 -right-1 w-2 h-2 bg-amber-400 dark:bg-blue-500 rounded-full animate-ping delay-300 hidden md:block"></div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="w-full lg:w-3/4 text-base md:text-lg lg:text-xl font-medium shadow-lg shadow-amber-100 dark:shadow-purple-300/30 rounded-2xl p-6 md:p-10 bg-amber-50/50 dark:bg-gray-800/70 backdrop-blur-xl border border-amber-200 dark:border-purple-800/50"
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-        >
+        <div className="w-full lg:w-3/4 text-base md:text-lg lg:text-xl font-medium shadow-lg shadow-amber-100 dark:shadow-purple-300/30 rounded-2xl p-6 md:p-10 bg-amber-50/50 dark:bg-gray-800/70 backdrop-blur-xl border border-amber-200 dark:border-purple-800/50">
           <h3 className="text-center text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
             <span className="text-amber-600 dark:text-purple-500 dark:drop-shadow-purple-600 dark:text-shadow-cyan-400 dark:text-shadow-2xs">
               Mahmoud Hamdi
@@ -110,13 +91,7 @@ const About = () => {
                 </form>
               </dialog>
             </div>
-            <motion.div
-              className="flex items-center gap-3 md:gap-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-            >
+            <div className="flex items-center gap-3 md:gap-4">
               <span className="text-lg font-semibold">{content.contactLabel}:</span>
               <a href="https://wa.me/201060813598" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <MdWhatsapp className="text-green-500 hover:text-green-400 hover:scale-110 transition-transform duration-300 hover:drop-shadow-sm hover:drop-shadow-green-400 size-8 md:size-10 cursor-pointer" />
@@ -130,9 +105,9 @@ const About = () => {
               <a href="https://www.linkedin.com/in/mahmoud-hamdi-743969245" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <FaLinkedin className="text-blue-500 hover:text-blue-400 hover:scale-110 transition-transform duration-300 hover:drop-shadow-sm hover:drop-shadow-blue-400 size-8 md:size-10 cursor-pointer" />
               </a>
-            </motion.div>
+            </div>
           </div>
-        </motion.div>
+        </div>
       </div>
       <TechMarquee />
     </section>

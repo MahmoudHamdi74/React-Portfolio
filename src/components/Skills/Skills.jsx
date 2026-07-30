@@ -68,13 +68,21 @@ const SKILLS_DATA = {
   }
 };
 
+const skillBarVariants = {
+  hidden: { opacity: 0, x: -30 },
+  visible: (i) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.4, delay: i * 0.1, ease: "easeOut" },
+  }),
+};
+
 const SkillBar = ({ skill, index }) => {
   return (
     <motion.div
       className="group"
-      initial={{ opacity: 0, x: -30 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
+      custom={index}
+      variants={skillBarVariants}
     >
       <div className="flex items-center justify-between m-2">
         <h4 className="text-xl font-bold gap-4 flex items-center">
@@ -87,14 +95,9 @@ const SkillBar = ({ skill, index }) => {
             {skill.label}
           </span>
         </h4>
-        <motion.span
-          className="text-sm font-mono"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
-        >
+        <span className="text-sm font-mono">
           {skill.level}%
-        </motion.span>
+        </span>
       </div>
 
       <div className="relative h-3 bg-transparent overflow-hidden">
@@ -114,7 +117,7 @@ const SkillBar = ({ skill, index }) => {
   );
 };
 
-const CategoryCard = ({ categoryName, data, isOpen, toggleOpen }) => {
+const CategoryCard = ({ category, categoryName, data, isOpen, toggleOpen }) => {
   return (
     <details
       open={isOpen}
@@ -138,13 +141,14 @@ const CategoryCard = ({ categoryName, data, isOpen, toggleOpen }) => {
         <AnimatePresence mode="wait">
           {isOpen && (
             <motion.div
+              key={`${category}-skills`}
               className="space-y-4"
               initial="hidden"
               animate="visible"
               exit="hidden"
               variants={{
-                visible: { transition: { staggerChildren: 0.05 } },
-                hidden: {}
+                visible: { transition: { staggerChildren: 0.08 } },
+                hidden: {},
               }}
             >
               {data.skills.map((skill, skillIndex) => (
@@ -179,29 +183,16 @@ export default function SkillsVisualization() {
   return (
     <section id="skills" aria-label="Skills" className="text-gray-900 dark:text-white transition-colors">
       <div className="pt-10">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <h2 className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
-            <FcServices className="mr-3" aria-hidden="true" /> {content.title}
-          </h2>
-          <p className="flex justify-center text-center mt-6 md:mt-10 text-base md:text-lg lg:text-xl max-w-3xl w-full mx-auto px-4 font-medium text-gray-500 dark:text-gray-400">
-            {content.description}
-          </p>
-        </motion.div>
+        <h2 className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
+          <FcServices className="mr-3" aria-hidden="true" /> {content.title}
+        </h2>
+        <p className="flex justify-center text-center mt-6 md:mt-10 text-base md:text-lg lg:text-xl max-w-3xl w-full mx-auto px-4 font-medium text-gray-500 dark:text-gray-400">
+          {content.description}
+        </p>
 
         <div className="mx-auto flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-6 mt-10 md:mt-20 max-w-7xl px-4">
-          {Object.entries(SKILLS_DATA).slice(0, 2).map(([category, data], index) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
-            >
+          {Object.entries(SKILLS_DATA).slice(0, 2).map(([category, data]) => (
+            <div key={category} className="flex-1">
               <CategoryCard
                 category={category}
                 categoryName={content.categoryNames[category]}
@@ -209,19 +200,13 @@ export default function SkillsVisualization() {
                 isOpen={openCategories[category]}
                 toggleOpen={() => toggleCategory(category)}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
 
         <div className="mx-auto flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-6 mt-6 md:mt-20 max-w-7xl px-4">
-          {Object.entries(SKILLS_DATA).slice(2, 4).map(([category, data], index) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
-            >
+          {Object.entries(SKILLS_DATA).slice(2, 4).map(([category, data]) => (
+            <div key={category} className="flex-1">
               <CategoryCard
                 category={category}
                 categoryName={content.categoryNames[category]}
@@ -229,32 +214,22 @@ export default function SkillsVisualization() {
                 isOpen={openCategories[category]}
                 toggleOpen={() => toggleCategory(category)}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        <motion.div
-          className="mx-auto mt-10 md:mt-20 max-w-7xl px-4"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <div className="mx-auto mt-10 md:mt-20 max-w-7xl px-4">
           <h2 className="font-bold mb-4 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
             {content.performanceMetrics}
           </h2>
           <LightHouseScoreCard />
-        </motion.div>
+        </div>
 
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4">
-          {QUICK_STATS.map((stat, index) => (
-            <motion.div
+          {QUICK_STATS.map((stat) => (
+            <div
               key={stat.label}
               className="text-center p-4 rounded-xl transition-all duration-300 bg-amber-50 dark:bg-gray-900/50 border border-amber-200 dark:border-purple-800/50 shadow-sm shadow-amber-100 dark:shadow-purple-900/30 hover:scale-105 hover:-translate-y-1"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
             >
               <div className="text-2xl mb-2">{stat.icon}</div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -263,7 +238,7 @@ export default function SkillsVisualization() {
               <div className="text-sm text-gray-600 dark:text-neutral-400">
                 {stat.label}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
