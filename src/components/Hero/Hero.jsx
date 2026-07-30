@@ -2,7 +2,7 @@ import React from 'react'
 import { Download, MailIcon } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import heroDict from '../../content/hero/hero.content';
-import TechCloud from './Orbit';
+import TechCloud from './orbit';
 import Cv from '../../assets/mahmoud_hamdi_cv.pdf';
 
 
