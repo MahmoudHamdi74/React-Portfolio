@@ -9,7 +9,8 @@ export default defineConfig({
     tailwindcss(),
     react(),
     sitemap({
-      hostname: 'https://mahmoudhamdi.dev'
+      hostname: 'https://mahmoudhamdi.dev',
+      generateRobotsTxt: false
     })
   ],
   server: {
