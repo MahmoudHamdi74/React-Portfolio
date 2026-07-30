@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import { useTranslation } from '../../hooks/useTranslation';
 import projectsDict from '../../content/projects/projects.content';
@@ -71,10 +72,15 @@ const Projects_Data = [
   },
 ];
 
-const ProjectCard = ({ project, content }) => {
+const ProjectCard = ({ project, content, index }) => {
   return (
-    <div
+    <motion.div
       className="bg-gray-50 ring-1 ring-amber-200/80 dark:ring-purple-800/60 hover:ring-amber-300 dark:hover:ring-purple-700/60 hover:shadow-lg hover:shadow-amber-200/40 dark:hover:shadow-purple-900/40 hover:scale-102 dark:bg-gray-900/50 rounded-lg shadow-sm shadow-amber-100/50 dark:shadow-purple-900/30 p-6 flex flex-col items-center text-center transition-all duration-300 cursor-pointer"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
+      whileHover={{ y: -5 }}
     >
       <div className="relevent h-48 overflow-hidden bg-gray-300 dark:bg-gray-700 rounded-xl">
         <img
@@ -128,7 +134,7 @@ const ProjectCard = ({ project, content }) => {
         </div>
       </div>
       <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-purple-700 blur-xl -z-10" />
-    </div>
+    </motion.div>
   );
 };
 
@@ -138,30 +144,40 @@ const Projects = () => {
   return (
     <section id="projects" aria-label="Featured Projects" className="py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700 mb-4">
            <span aria-hidden="true">🚀</span> {content.title}
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {content.description}
           </p>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Projects_Data.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} content={content} />
           ))}
         </div>
-        <div
-          className="text-center mt-12"
-        >
-        <a
-          href="https://github.com/MahmoudHamdi74?tab=repositories"
-          target="_blank"
-          rel="noopener noreferrer"
+        <div className="text-center mt-12">
+          <motion.a
+            href="https://github.com/MahmoudHamdi74?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3 bg-amber-500 dark:bg-purple-700 hover:bg-amber-600 dark:hover:bg-purple-600 text-white rounded-lg font-medium transition-all duration-300 shadow-md shadow-amber-200/50 hover:shadow-lg hover:shadow-amber-300/60 dark:shadow-purple-900/40 dark:hover:shadow-purple-800/50"
-        >
-          <FaGithub className="text-xl" /> <span>{content.viewMore}</span>
-        </a>
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FaGithub className="text-xl" /> <span>{content.viewMore}</span>
+          </motion.a>
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaAngular,
   FaBootstrap,
@@ -24,7 +25,6 @@ import { useTranslation } from '../../hooks/useTranslation';
 import skillsDict from '../../content/skills/skills.content';
 import LightHouseScoreCard from './LightHouseScoreCard';
 
-// Skills Data مباشرة في الملف
 const SKILLS_DATA = {
   frontend: {
     icon: "🎨",
@@ -68,22 +68,14 @@ const SKILLS_DATA = {
   }
 };
 
-// Skill Bar Component
-const SkillBar = ({ skill, index, isVisible }) => {
-  const [animatedLevel, setAnimatedLevel] = useState(0);
-
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setAnimatedLevel(skill.level);
-      }, index * 100);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, skill.level, index]);
-
+const SkillBar = ({ skill, index }) => {
   return (
-    <div className="group">
-      {/* Skill Header */}
+    <motion.div
+      className="group"
+      initial={{ opacity: 0, x: -30 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
+    >
       <div className="flex items-center justify-between m-2">
         <h4 className="text-xl font-bold gap-4 flex items-center">
           <span aria-hidden="true">{skill.icon}</span> {skill.name}
@@ -95,31 +87,34 @@ const SkillBar = ({ skill, index, isVisible }) => {
             {skill.label}
           </span>
         </h4>
-        <span className="text-sm font-mono" aria-label={`${animatedLevel} percent`}>{animatedLevel}%</span>
+        <motion.span
+          className="text-sm font-mono"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.3, delay: index * 0.1 + 0.3 }}
+        >
+          {skill.level}%
+        </motion.span>
       </div>
 
-      {/* Progress Bar */}
-      <div className="relative h-3 bg-transparent">
-        {/* Animated progress bar */}
-        <div
+      <div className="relative h-3 bg-transparent overflow-hidden">
+        <motion.div
           className="absolute top-0 left-0 h-full rounded-full bg-linear-to-r from-amber-400 to-amber-600 dark:from-purple-500 dark:to-cyan-400"
-          style={{ width: `${animatedLevel}%` }}
+          initial={{ width: 0 }}
+          animate={{ width: `${skill.level}%` }}
+          transition={{ duration: 0.8, delay: index * 0.1 + 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           role="progressbar"
-          aria-valuenow={animatedLevel}
+          aria-valuenow={skill.level}
           aria-valuemin="0"
           aria-valuemax="100"
           aria-label={`${skill.name} proficiency`}
         />
       </div>
-
-      {/* Skill Details on Hover - اختياري */}
-      
-    </div>
+    </motion.div>
   );
 };
 
-// Category Card Component
-const CategoryCard = ({ categoryName, data, isOpen, toggleOpen, content }) => {
+const CategoryCard = ({ categoryName, data, isOpen, toggleOpen }) => {
   return (
     <details
       open={isOpen}
@@ -128,8 +123,6 @@ const CategoryCard = ({ categoryName, data, isOpen, toggleOpen, content }) => {
     >
       <summary className="collapse-title font-semibold text-2xl block items-center gap-2">
         <span className="text-3xl">{data.icon}</span> {categoryName}
-        
-        {/* Badges */}
         <div className="m-4 flex items-center gap-2">
           {data.badges.map((badge, idx) => (
             <div key={idx} className="badge badge-lg p-2 bg-amber-500/20 text-amber-800 dark:bg-purple-800/40 dark:text-purple-200">
@@ -139,28 +132,32 @@ const CategoryCard = ({ categoryName, data, isOpen, toggleOpen, content }) => {
         </div>
       </summary>
 
-      {/* Expanded Content */}
       <div className="collapse-content text-sm">
         <div className="w-full bg-amber-200 dark:bg-cyan-400 h-0.5 mb-7" />
 
-        {/* Skills List */}
-        <div className="space-y-4">
-          {data.skills.map((skill, skillIndex) => (
-            <SkillBar
-              key={skill.name}
-              skill={skill}
-              index={skillIndex}
-              isVisible={isOpen}
-              content={content}
-            />
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          {isOpen && (
+            <motion.div
+              className="space-y-4"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                visible: { transition: { staggerChildren: 0.05 } },
+                hidden: {}
+              }}
+            >
+              {data.skills.map((skill, skillIndex) => (
+                <SkillBar key={skill.name} skill={skill} index={skillIndex} />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </details>
   );
 };
 
-// Main Component
 export default function SkillsVisualization() {
   const [openCategories, setOpenCategories] = useState({});
   const content = useTranslation(skillsDict);
@@ -182,62 +179,82 @@ export default function SkillsVisualization() {
   return (
     <section id="skills" aria-label="Skills" className="text-gray-900 dark:text-white transition-colors">
       <div className="pt-10">
-        {/* Header */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="flex justify-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
             <FcServices className="mr-3" aria-hidden="true" /> {content.title}
           </h2>
           <p className="flex justify-center text-center mt-6 md:mt-10 text-base md:text-lg lg:text-xl max-w-3xl w-full mx-auto px-4 font-medium text-gray-500 dark:text-gray-400">
             {content.description}
           </p>
-        </div>
+        </motion.div>
 
-        {/* Skills Grid - First Row */}
         <div className="mx-auto flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-6 mt-10 md:mt-20 max-w-7xl px-4">
           {Object.entries(SKILLS_DATA).slice(0, 2).map(([category, data], index) => (
-            <CategoryCard
+            <motion.div
               key={category}
-              category={category}
-              categoryName={content.categoryNames[category]}
-              data={data}
-              index={index}
-              isOpen={openCategories[category]}
-              toggleOpen={() => toggleCategory(category)}
-              content={content}
-            />
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
+            >
+              <CategoryCard
+                category={category}
+                categoryName={content.categoryNames[category]}
+                data={data}
+                isOpen={openCategories[category]}
+                toggleOpen={() => toggleCategory(category)}
+              />
+            </motion.div>
           ))}
         </div>
 
-        {/* Skills Grid - Second Row */}
         <div className="mx-auto flex flex-col md:flex-row items-stretch justify-between gap-4 md:gap-6 mt-6 md:mt-20 max-w-7xl px-4">
           {Object.entries(SKILLS_DATA).slice(2, 4).map(([category, data], index) => (
-            <CategoryCard
+            <motion.div
               key={category}
-              category={category}
-              categoryName={content.categoryNames[category]}
-              data={data}
-              index={index + 2}
-              isOpen={openCategories[category]}
-              toggleOpen={() => toggleCategory(category)}
-              content={content}
-            />
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
+            >
+              <CategoryCard
+                category={category}
+                categoryName={content.categoryNames[category]}
+                data={data}
+                isOpen={openCategories[category]}
+                toggleOpen={() => toggleCategory(category)}
+              />
+            </motion.div>
           ))}
         </div>
 
-        {/* Performance Metrics */}
-        <div className="mx-auto mt-10 md:mt-20 max-w-7xl px-4">
+        <motion.div
+          className="mx-auto mt-10 md:mt-20 max-w-7xl px-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className="font-bold mb-4 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-gray-900 dark:text-purple-100 dark:drop-shadow-lg dark:drop-shadow-purple-700">
             {content.performanceMetrics}
           </h2>
           <LightHouseScoreCard />
-        </div>
+        </motion.div>
 
-        {/* Quick Stats */}
         <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-7xl mx-auto px-4">
-          {QUICK_STATS.map((stat) => (
-            <div
+          {QUICK_STATS.map((stat, index) => (
+            <motion.div
               key={stat.label}
               className="text-center p-4 rounded-xl transition-all duration-300 bg-amber-50 dark:bg-gray-900/50 border border-amber-200 dark:border-purple-800/50 shadow-sm shadow-amber-100 dark:shadow-purple-900/30 hover:scale-105 hover:-translate-y-1"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
             >
               <div className="text-2xl mb-2">{stat.icon}</div>
               <div className="text-2xl font-bold text-gray-900 dark:text-white">
@@ -246,7 +263,7 @@ export default function SkillsVisualization() {
               <div className="text-sm text-gray-600 dark:text-neutral-400">
                 {stat.label}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
