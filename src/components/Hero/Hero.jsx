@@ -3,7 +3,7 @@ import { Download, MailIcon } from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import heroDict from '../../content/hero/hero.content';
 import TechCloud from './orbit';
-import Cv from '../../assets/mahmoud_hamdi_cv.pdf';
+import Cv from '../../assets/Mahmoud_Hamdi_full-stack updated.pdf';
 
 
 const Hero = () => {
@@ -61,7 +61,7 @@ const Hero = () => {
         <h2 className='relative z-10 my-4 md:my-8 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-amber-600 dark:text-purple-500 dark:drop-shadow-lg dark:drop-shadow-purple-700 animate-bounce duration-1000'>{content.title}</h2>
         <p className='relative z-10 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 my-4 md:my-8 font-medium text-gray-700 dark:text-purple-300 dark:drop-shadow-lg dark:drop-shadow-purple-700'>{content.description}</p>
         <div className='flex justify-center mt-8 lg:justify-start gap-4'>
-        <a href={Cv} download="Mahmoud_Hamdi_CV.pdf" aria-label={content.downloadCV} className='relative z-10 w-36 md:w-40 h-11 md:h-12 flex justify-center items-center gap-1 text-base md:text-lg font-medium text-amber-800 ring-2 ring-amber-800 bg-amber-500 hover:bg- shadow-md shadow-amber-200/50 hover:shadow-lg hover:shadow-amber-300/60 dark:bg-purple-600 dark:ring-purple-500 dark:text-purple-100 dark:shadow-purple-900/30 dark:hover:bg-purple-700 dark:hover:shadow-purple-800/50 rounded-md transition-all duration=300'><Download aria-hidden="true" />{content.downloadCV}</a>
+        <a href={Cv} download="Mahmoud_Hamdi_full-stack updated.pdf" aria-label={content.downloadCV} className='relative z-10 w-36 md:w-40 h-11 md:h-12 flex justify-center items-center gap-1 text-base md:text-lg font-medium text-amber-800 ring-2 ring-amber-800 bg-amber-500 hover:bg- shadow-md shadow-amber-200/50 hover:shadow-lg hover:shadow-amber-300/60 dark:bg-purple-600 dark:ring-purple-500 dark:text-purple-100 dark:shadow-purple-900/30 dark:hover:bg-purple-700 dark:hover:shadow-purple-800/50 rounded-md transition-all duration=300'><Download aria-hidden="true" />{content.downloadCV}</a>
         <a href="#contact" aria-label={content.contactMe} className='relative z-10 w-36 md:w-40 h-11 md:h-12 flex justify-center items-center gap-1 text-base md:text-lg font-medium text-amber-600 ring-2 ring-amber-500 hover:bg-amber-500 hover:text-amber-800 hover:ring-amber-800 shadow-md shadow-amber-200/50 hover:shadow-lg hover:shadow-amber-300/60 dark:bg-transparent dark:ring-2 dark:ring-purple-500 dark:hover:ring-purple-300 dark:text-purple-400 dark:shadow-purple-900/30 dark:hover:bg-purple-700 dark:hover:text-purple-200 dark:hover:shadow-purple-800/50 rounded-md transition-all duration=300'><MailIcon aria-hidden="true" />{content.contactMe}</a>
         </div>
       </div>

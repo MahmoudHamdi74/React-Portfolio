@@ -7,6 +7,7 @@ import itihub from "../../assets/images/itihub.png";
 import portfolio from "../../assets/images/portfolio.png";
 import playblocks from "../../assets/images/playblocks.png";
 import chat from "../../assets/images/chat.png";
+import elnqaa from "../../assets/images/elnqaa.png";
 
 const Projects_Data = [
   {
@@ -69,6 +70,16 @@ const Projects_Data = [
     liveUrl: "https://mahmoudhamdi74.github.io/chat-app/",
     githubUrl: "https://github.com/MahmoudHamdi74/chat-app",
   },
+  {
+    id: 6,
+    title: "elnqaa company website",
+    image: elnqaa,
+    description:
+      "a company website for elnqaa company, built with Next.js and Tailwind CSS, featuring a responsive design and optimized performance for an engaging user experience.",
+    technologies: ["React", "Tailwind CSS", "Node.js"],
+    liveUrl: "https://elnqaa-kw.com/",
+    githubUrl: "#",
+  }
 ];
 
 const ProjectCard = ({ project, content }) => {
